@@ -1,0 +1,43 @@
+#navbar {
+    border-bottom: dashed 10px #6c757d;
+}
+
+#container {
+    border-bottom: dashed 10px #6c757d;
+}
+
+#main {
+    margin: 100px;
+    height: 522px;
+    width: 522px;
+}
+
+#main .row {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+#main .row .col {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    font-size: 120px;
+    font-weight: bold;
+    border-radius: 10px;
+    background-color: wheat;
+    padding: 0;
+    height: 150px;
+    margin: 8px;
+}
+
+#playText {
+    transition-duration: 5s;
+}
+
+#player1,
+#player2 {
+    font-size: 4rem;
+    border-radius: 20px;
+}
