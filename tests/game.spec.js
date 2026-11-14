@@ -45,3 +45,18 @@ test('keyboard play exposes cell positions and live turns', async ({ page }) => 
   await expect(cell(page, 1)).toBeFocused();
   await expect(page.getByRole('status')).toHaveText('Player 1 (X) to play');
 });
+
+test('board fits viewport and works without external assets', async ({ page }, testInfo) => {
+  await page.route('https://**/*', route => route.abort());
+  await page.reload();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  for (let i = 0; i < 9; i++) {
+    const bounds = await cell(page, i).boundingBox();
+    expect(bounds.width).toBeGreaterThanOrEqual(44);
+    expect(bounds.x).toBeGreaterThanOrEqual(0);
+    expect(bounds.x + bounds.width).toBeLessThanOrEqual(page.viewportSize().width);
+  }
+  await moves(page, [0,3,1,4,2]);
+  await expect(page.getByRole('status')).toContainText('wins!');
+  await page.screenshot({ path: testInfo.outputPath('board.png'), fullPage: true });
+});
