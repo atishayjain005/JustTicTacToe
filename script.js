@@ -15,6 +15,7 @@ cols.forEach((box, index) => {
         if (finished || spaces[index]) return;
         spaces[index] = currentPlayer;
         box.textContent = currentPlayer;
+        box.setAttribute('aria-label', `Row ${Math.floor(index / 3) + 1}, column ${index % 3 + 1}: ${currentPlayer}`);
         const winningLine = winningLines.find(line => line.every(i => spaces[i] === currentPlayer));
         if (winningLine) {
             finished = true;
@@ -31,7 +32,10 @@ cols.forEach((box, index) => {
 
 reset.addEventListener('click', () => {
     spaces.fill(null);
-    cols.forEach(box => { box.textContent = ''; });
+    cols.forEach((box, index) => {
+        box.textContent = '';
+        box.setAttribute('aria-label', `Row ${Math.floor(index / 3) + 1}, column ${index % 3 + 1}: empty`);
+    });
     currentPlayer = 'X';
     finished = false;
     playText.textContent = 'Player 1 (X) to play';

@@ -41,3 +41,6 @@
     font-size: 4rem;
     border-radius: 20px;
 }
+body { background: #212529; }
+button:focus-visible { outline: 4px solid #bfa1ff; outline-offset: 4px; }
+#main button { color: #212529; cursor: pointer; border: 2px solid transparent; }

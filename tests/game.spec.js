@@ -32,3 +32,16 @@ test('draw and restart clear the round', async ({ page }) => {
   await moves(page, [4]);
   await expect(cell(page, 4)).toHaveText('X');
 });
+
+test('keyboard play exposes cell positions and live turns', async ({ page }) => {
+  const first = page.getByRole('button', { name: 'Row 1, column 1: empty' });
+  await first.focus();
+  await page.keyboard.press('Enter');
+  await expect(page.getByRole('status')).toHaveText('Player 2 (O) to play');
+  await expect(cell(page, 0)).toHaveAccessibleName('Row 1, column 1: X');
+  await page.keyboard.press('Tab');
+  await page.keyboard.press('Space');
+  await expect(cell(page, 1)).toHaveText('O');
+  await expect(cell(page, 1)).toBeFocused();
+  await expect(page.getByRole('status')).toHaveText('Player 1 (X) to play');
+});

@@ -26,9 +26,9 @@
         </a>
     </nav>
 
-    <!-- CONTAINER MAIN -->
+    <p id="instructions" class="text-center text-light">Two players on one device. X starts. Use Tab to choose a square and Enter or Space to play.</p>
     <div class="text-center bg-dark pb-4">
-        <h1 class="text-center py-4 pt-5 text-light" id="playtext" style="font-size: 4rem;">Let's Play</h1>
+        <h2 role="status" aria-live="polite" aria-atomic="true" class="text-center py-4 pt-5 text-light" id="playtext" style="font-size: 4rem;">Let's Play</h2>
         <button class="btn btn-outline-secondary border-5" id="reset"><h3 class = "m-0 p-0">Restart</h3> </button></div>
     <div id="container" class="container-fluid pb-5 bg-dark my-0 d-flex justify-content-evenly">
 
@@ -36,21 +36,21 @@
             <h1 id="player1" style="transition-duration: 0.5s;color: #0d6efd;">Player 1<br>X
             </h1>
         </div>
-        <div id="main" class="text-center my-3">
+        <div id="main" class="text-center my-3" role="group" aria-label="Tic-tac-toe board" aria-describedby="instructions">
             <div class="row">
-                <div id="0" class="col"></div>
-                <div id="1" class="col"></div>
-                <div id="2" class="col"></div>
+                <button type="button" id="0" class="col" aria-label="Row 1, column 1: empty"></button>
+                <button type="button" id="1" class="col" aria-label="Row 1, column 2: empty"></button>
+                <button type="button" id="2" class="col" aria-label="Row 1, column 3: empty"></button>
             </div>
             <div class="row">
-                <div id="3" class="col"></div>
-                <div id="4" class="col"></div>
-                <div id="5" class="col"></div>
+                <button type="button" id="3" class="col" aria-label="Row 2, column 1: empty"></button>
+                <button type="button" id="4" class="col" aria-label="Row 2, column 2: empty"></button>
+                <button type="button" id="5" class="col" aria-label="Row 2, column 3: empty"></button>
             </div>
             <div class="row">
-                <div id="6" class="col"></div>
-                <div id="7" class="col"></div>
-                <div id="8" class="col"></div>
+                <button type="button" id="6" class="col" aria-label="Row 3, column 1: empty"></button>
+                <button type="button" id="7" class="col" aria-label="Row 3, column 2: empty"></button>
+                <button type="button" id="8" class="col" aria-label="Row 3, column 3: empty"></button>
             </div>
         </div>
         <div class=" d-flex flex-column justify-content-center align-self-center w-25 text-center text-secondary">
