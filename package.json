@@ -1,0 +1,10 @@
+{
+  "name": "just-tic-tac-toe",
+  "private": true,
+  "scripts": {
+    "check": "node --check script.js",
+    "test": "playwright test",
+    "start": "python3 -m http.server 4177 --bind 127.0.0.1"
+  },
+  "devDependencies": { "@playwright/test": "1.65.0" }
+}
