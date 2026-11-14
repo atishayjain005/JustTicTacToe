@@ -60,3 +60,23 @@ test('board fits viewport and works without external assets', async ({ page }, t
   await expect(page.getByRole('status')).toContainText('wins!');
   await page.screenshot({ path: testInfo.outputPath('board.png'), fullPage: true });
 });
+
+test('winning squares are marked and restart restores keyboard focus', async ({ page }) => {
+  await moves(page, [0,3,1,4,2]);
+  await expect(page.locator('.winning')).toHaveCount(3);
+  await expect(cell(page, 0)).toHaveAccessibleName('Row 1, column 1: X, winning square');
+  await page.getByRole('button', { name: 'Restart', exact: true }).click();
+  await expect(page.locator('.winning')).toHaveCount(0);
+  await expect(cell(page, 0)).toBeFocused();
+  await expect(cell(page, 0)).toHaveAccessibleName('Row 1, column 1: empty');
+  await page.keyboard.press('Space');
+  await expect(cell(page, 0)).toHaveText('X');
+  await expect(page.getByRole('status')).toHaveText('Player 2 (O) to play');
+});
+test('restart also clears a round in progress', async ({ page }) => {
+  await moves(page, [0,4]);
+  await page.getByRole('button', { name: 'Restart', exact: true }).click();
+  await expect(page.locator('#main .col')).toHaveText(Array(9).fill(''));
+  await page.keyboard.press('Enter');
+  await expect(cell(page, 0)).toHaveText('X');
+});

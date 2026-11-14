@@ -19,6 +19,10 @@ cols.forEach((box, index) => {
         const winningLine = winningLines.find(line => line.every(i => spaces[i] === currentPlayer));
         if (winningLine) {
             finished = true;
+            winningLine.forEach(i => {
+                cols[i].classList.add('winning');
+                cols[i].setAttribute('aria-label', `${cols[i].getAttribute('aria-label')}, winning square`);
+            });
             playText.textContent = `Player ${currentPlayer === 'X' ? 1 : 2} (${currentPlayer}) wins!`;
         } else if (spaces.every(Boolean)) {
             finished = true;
@@ -34,10 +38,12 @@ reset.addEventListener('click', () => {
     spaces.fill(null);
     cols.forEach((box, index) => {
         box.textContent = '';
+        box.classList.remove('winning');
         box.setAttribute('aria-label', `Row ${Math.floor(index / 3) + 1}, column ${index % 3 + 1}: empty`);
     });
     currentPlayer = 'X';
     finished = false;
     playText.textContent = 'Player 1 (X) to play';
+    cols[0].focus();
 });
 playText.textContent = 'Player 1 (X) to play';
